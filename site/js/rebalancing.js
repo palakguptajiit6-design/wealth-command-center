@@ -44,6 +44,7 @@
   function init(root) {
     panel = root;
     root.innerHTML = `
+      <p class="notice"><strong>This result is specific to one period.</strong> The target weights were chosen using the same history they are tested on, so the gain or cost from rebalancing shown here may not repeat.</p>
       <div class="panel-grid">
         <div>
           <div class="card">
