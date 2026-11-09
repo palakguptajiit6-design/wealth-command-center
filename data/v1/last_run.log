@@ -1,0 +1,67 @@
+Downloading market data
+  HDFCBANK     HDFCBANK.NS      from 1996-01-01
+  ICICIBANK    ICICIBANK.NS     from 2002-07-01
+  TCS          TCS.NS           from 2002-08-12
+  INFY         INFY.NS          from 1996-01-01
+  RELIANCE     RELIANCE.NS      from 1996-01-01
+  NTPC         NTPC.NS          from 2004-11-05
+  ITC          ITC.NS           from 1996-01-01
+  HINDUNILVR   HINDUNILVR.NS    from 1996-01-01
+  MARUTI       MARUTI.NS        from 2003-07-09
+  LT           LT.NS            from 2002-07-01
+  BHARTIARTL   BHARTIARTL.NS    from 2002-07-01
+  SUNPHARMA    SUNPHARMA.NS     from 1996-01-01
+  GOLD         GOLDBEES.NS      from 2009-01-02
+  INDEBT       EBBETF0430.NS    from 2019-12-30
+  GLOBALEQ     URTH             from 2012-01-12
+  GLOBALBD     BNDX             from 2013-06-04
+  RF           0P00005UPP.BO    from 2018-01-01
+  NIFTY        NIFTYBEES.NS     from 2009-01-02
+  ACWI         ACWI             from 2008-03-28
+  AGG          AGG              from 2003-09-29
+Common window 2019-12-30 to 2026-11-09, 1699 sessions
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/build_data.py:168: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  rf_recent = panel["RF"].loc[panel.index[-1] - pd.Timedelta(days=cfg.ANNUAL_RF_LOOKBACK_DAYS):]
+PASS  ORP weights sum to one: sum=1.0000000000
+PASS  MVP weights sum to one: sum=1.0000000000
+PASS  Frontier weights sum to one: worst error=2.22e-16
+PASS  Weights respect long-only bounds and caps: min=0.00e+00, largest cap excess=1.11e-16
+PASS  Frontier is upward sloping and concave: min second difference of volatility=1.63e-05
+PASS  MVP is the lowest-risk frontier point: MVP vol=0.0382
+PASS  Tangency Sharpe beats every frontier point: ORP=0.8228, best point=0.8224
+PASS  Risk-free rate is plausible: rf=0.0635
+PASS  ORP earns a premium over risk-free: E=0.1240
+PASS  Covariance matrix is positive definite: smallest eigenvalue=1.01e-03
+PASS  orp 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0112
+PASS  orp 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0215
+PASS  orp performance ratios plausible: Sharpe=1.37, Sortino=1.96, beta=0.30
+PASS  orp drawdown is negative: MDD=-0.1314
+PASS  mvp 95% VaR sign, order and size: VaR/daily vol=1.31, CVaR=0.0058
+PASS  mvp 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0110
+PASS  mvp performance ratios plausible: Sharpe=0.62, Sortino=0.87, beta=0.11
+PASS  mvp drawdown is negative: MDD=-0.0637
+PASS  A2 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0112
+PASS  A2 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0215
+PASS  A2 performance ratios plausible: Sharpe=1.37, Sortino=1.96, beta=0.30
+PASS  A2 drawdown is negative: MDD=-0.1314
+PASS  A4 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0112
+PASS  A4 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0215
+PASS  A4 performance ratios plausible: Sharpe=1.37, Sortino=1.96, beta=0.30
+PASS  A4 drawdown is negative: MDD=-0.1314
+PASS  A6 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0112
+PASS  A6 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0215
+PASS  A6 performance ratios plausible: Sharpe=1.37, Sortino=1.96, beta=0.30
+PASS  A6 drawdown is negative: MDD=-0.1314
+PASS  A8 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0112
+PASS  A8 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0215
+PASS  A8 performance ratios plausible: Sharpe=1.37, Sortino=1.96, beta=0.30
+PASS  A8 drawdown is negative: MDD=-0.1314
+PASS  benchmark 95% VaR sign, order and size: VaR/daily vol=1.43, CVaR=0.0241
+PASS  benchmark 99% VaR sign, order and size: VaR/daily vol=2.89, CVaR=0.0432
+PASS  benchmark performance ratios plausible: Sharpe=0.46, Sortino=0.63, beta=1.00
+PASS  benchmark drawdown is negative: MDD=-0.3634
+PASS  Brinson effects sum to active return: residual=5.55e-16
+PASS  2008 Global Financial Crisis is a real drawdown: Nifty -59.9% from 2008-01-08 to 2008-10-27
+PASS  2020 COVID Crash is a real drawdown: Nifty -38.4% from 2020-01-14 to 2020-03-23
+Wrote 8 files to /home/runner/work/wealth-command-center/wealth-command-center/data/v1
+exit_code=0

@@ -1,0 +1,15 @@
+{
+  "schema_version": "v1",
+  "generated_at_utc": "2026-11-09T16:48:03Z",
+  "data_through": "2026-11-09",
+  "yfinance_version": "1.8.0",
+  "files": [
+    "checks.json",
+    "frontier.json",
+    "market.json",
+    "performance.json",
+    "risk.json",
+    "series.json",
+    "universe.json"
+  ]
+}
