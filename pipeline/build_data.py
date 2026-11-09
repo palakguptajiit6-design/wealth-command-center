@@ -195,37 +195,71 @@ def main() -> int:
                 "daily_volatility": float(series.std()), "annual_volatility": float(series.std() * np.sqrt(an.TRADING_DAYS)),
                 "performance": an.performance(series, rf_series, bench_series)}
 
+    def client_portfolio(a: float) -> dict:
+        """Optimal complete portfolio for risk aversion a, with no borrowing.
+
+        y* below one mixes the tangency portfolio with cash. Above one the investor cannot
+        lever along the CAL, so the choice is the frontier point with the highest utility.
+        """
+        unconstrained = y_star(a)
+        if unconstrained <= 1:
+            return {"a": a, "y": unconstrained, "y_unconstrained": unconstrained, "weights": orp * unconstrained, "cash": 1 - unconstrained, "on_cal": True}
+        utility = [p["expected_return"] - 0.5 * a * p["volatility"] ** 2 for p in efficient_points]
+        candidates = [(u, np.array(p["weights"])) for u, p in zip(utility, efficient_points) if p["expected_return"] >= orp_stats["expected_return"]]
+        chosen = max(candidates, key=lambda item: item[0])[1] if candidates else orp
+        return {"a": a, "y": 1.0, "y_unconstrained": unconstrained, "weights": chosen, "cash": 0.0, "on_cal": False}
+
+    def client_series(client: dict) -> pd.Series:
+        return pd.Series(returns_held @ client["weights"] + client["cash"] * rf_series.to_numpy(), index=daily.index)
+
     references = {"orp": risk_block(portfolio_series(orp)), "mvp": risk_block(portfolio_series(mvp))}
-    for a in cfg.REFERENCE_RISK_AVERSIONS:
-        y = min(1.0, y_star(a))
-        references[f"A{a}"] = {"a": a, "y": y, "y_unconstrained": y_star(a), **risk_block(portfolio_series(orp, y))}
+    clients = {a: client_portfolio(a) for a in cfg.REFERENCE_RISK_AVERSIONS}
+    for a, client in clients.items():
+        references[f"A{a}"] = {**{k: client[k] for k in ("a", "y", "y_unconstrained", "cash", "on_cal")}, "weights": client["weights"].tolist(),
+                               "expected_return": float(client["weights"] @ mu + client["cash"] * rf),
+                               "model_volatility": float(np.sqrt(client["weights"] @ cov @ client["weights"])),
+                               **risk_block(client_series(client))}
     references["benchmark"] = risk_block(bench_series)
 
-    orp_by_key = dict(zip(keys, orp))
     bench_daily = pd.DataFrame({sleeve: daily[b["key"]].to_numpy() for sleeve, b in cfg.SLEEVE_BENCHMARKS.items()}, index=daily.index)
     bench_daily["cash"] = rf_series.to_numpy()
-    port_sleeve_daily = sleeve_daily_returns(daily, keys, sleeve_of, orp_by_key, bench_daily)
-
     sleeve_ids = [s["id"] for s in cfg.SLEEVES] + ["cash"]
-    orp_sleeves = np.array([sum(orp_by_key[k] for k in keys if sleeve_of[k] == s["id"]) for s in cfg.SLEEVES] + [0.0])
     bench_sleeves = np.array([s["benchmark_weight"] for s in cfg.SLEEVES] + [0.0])
-    monthly_port = (1 + port_sleeve_daily[sleeve_ids]).resample("ME").prod() - 1
-    monthly_bench = (1 + bench_daily[sleeve_ids]).resample("ME").prod() - 1
-    # Complete months only, so a partial first or last month does not distort the attribution.
-    first_full = panel.index[0] + pd.offsets.MonthEnd(1)
-    keep = (monthly_port.index > first_full) & (monthly_port.index < pd.Timestamp(panel.index[-1] + pd.offsets.MonthEnd(0)))
-    monthly_port, monthly_bench = monthly_port[keep], monthly_bench[keep]
-    brinson_orp = an.brinson(orp_sleeves, bench_sleeves, monthly_port.to_numpy(), monthly_bench.to_numpy())
+
+    def monthly_mask(frame: pd.DataFrame) -> np.ndarray:
+        # Complete months only, so a partial first or last month does not distort the attribution.
+        first_full = panel.index[0] + pd.offsets.MonthEnd(1)
+        return (frame.index > first_full) & (frame.index < pd.Timestamp(panel.index[-1] + pd.offsets.MonthEnd(0)))
+
+    def attribute(weights: np.ndarray, cash: float) -> tuple[dict, pd.DataFrame, np.ndarray]:
+        by_key = dict(zip(keys, weights))
+        sleeve_daily = sleeve_daily_returns(daily, keys, sleeve_of, by_key, bench_daily)
+        monthly = (1 + sleeve_daily[sleeve_ids]).resample("ME").prod() - 1
+        monthly = monthly[monthly_mask(monthly)]
+        bench = (1 + bench_daily[sleeve_ids]).resample("ME").prod() - 1
+        bench = bench[monthly_mask(bench)]
+        port_sleeves = np.array([sum(by_key[k] for k in keys if sleeve_of[k] == s["id"]) for s in cfg.SLEEVES] + [cash])
+        return an.brinson(port_sleeves, bench_sleeves, monthly.to_numpy(), bench.to_numpy()), bench, port_sleeves
+
+    brinson_orp, monthly_bench, orp_sleeves = attribute(orp, 0.0)
+    port_sleeve_daily = sleeve_daily_returns(daily, keys, sleeve_of, dict(zip(keys, orp)), bench_daily)
 
     nifty_index = market["proxies"]["NSEI"]
     stress = stress_tests(daily, port_sleeve_daily, market["proxies"], nifty_index)
-    target_cash = np.append(orp, 0.0)
+
+    reference_client = clients[cfg.REFERENCE_CLIENT_A]
+    brinson_client, _, client_sleeves = attribute(reference_client["weights"], reference_client["cash"])
+    client_sleeve_daily = sleeve_daily_returns(daily, keys, sleeve_of, dict(zip(keys, reference_client["weights"])), bench_daily)
+    client_stress = stress_tests(daily, client_sleeve_daily, market["proxies"], nifty_index)
+    stress_totals = {x["id"]: float(sum(w * x["shocks"][s] for w, s in zip(client_sleeves, sleeve_ids))) for x in client_stress}
+
     all_returns = np.column_stack([returns_held, rf_series.to_numpy()])
-    drift = an.rebalance_backtest(all_returns, target_cash, None, cfg.DEFAULT_ONE_WAY_COST)
-    banded = an.rebalance_backtest(all_returns, target_cash, cfg.DEFAULT_REBALANCE_BAND, cfg.DEFAULT_ONE_WAY_COST)
+    target = np.append(reference_client["weights"], reference_client["cash"])
+    drift = an.rebalance_backtest(all_returns, target, None, cfg.DEFAULT_ONE_WAY_COST)
+    banded = an.rebalance_backtest(all_returns, target, cfg.DEFAULT_REBALANCE_BAND, cfg.DEFAULT_ONE_WAY_COST)
     reference_rebalance = {k: {x: v[x] for x in v if x != "path"} for k, v in {"buy_and_hold": drift, "banded": banded}.items()}
 
-    checks = run_checks(orp, mvp, efficient_points, mu, cov, rf, references, brinson_orp, stress, upper, orp_stats)
+    checks = run_checks(orp, mvp, efficient_points, mu, cov, rf, references, brinson_orp, stress, upper, orp_stats, clients, brinson_client)
     failed = [c for c in checks if not c["passed"]]
     for check in checks:
         print(f"{'PASS' if check['passed'] else 'FAIL'}  {check['name']}: {check['detail']}", flush=True)
@@ -251,11 +285,12 @@ def main() -> int:
         "frontier.json": {"risk_free_rate": rf, "keys": keys, "caps": upper.tolist(), "mvp": {**mvp_stats, "weights": mvp.tolist()},
                           "orp": {**orp_stats, "weights": orp.tolist()}, "efficient": efficient_points, "inefficient": inefficient_points,
                           "cal_slope": orp_stats["sharpe"]},
-        "risk.json": {"references": references, "stress": stress, "var_confidences": cfg.VAR_CONFIDENCES},
-        "performance.json": {"sleeves": sleeve_ids, "months": [d.strftime("%Y-%m") for d in monthly_port.index], "port_returns": monthly_port.to_numpy().tolist(),
+        "risk.json": {"references": references, "stress": stress, "var_confidences": cfg.VAR_CONFIDENCES, "reference_client_a": cfg.REFERENCE_CLIENT_A, "reference_stress_totals": stress_totals},
+        "performance.json": {"sleeves": sleeve_ids, "months": [d.strftime("%Y-%m") for d in monthly_bench.index],
                              "bench_returns": monthly_bench.to_numpy().tolist(), "orp_sleeve_weights": orp_sleeves.tolist(),
                              "bench_sleeve_weights": bench_sleeves.tolist(), "sleeve_benchmarks": {k: meta_by_key.get(v["key"], {}).get("name", v["key"]) for k, v in cfg.SLEEVE_BENCHMARKS.items()},
-                             "reference_brinson_orp": brinson_orp, "reference_rebalance_orp": reference_rebalance},
+                             "reference_brinson_orp": brinson_orp, "reference_client_a": cfg.REFERENCE_CLIENT_A, "reference_brinson_client": brinson_client,
+                             "reference_rebalance_client": reference_rebalance, "default_one_way_cost": cfg.DEFAULT_ONE_WAY_COST},
         "series.json": {"dates": dates, "keys": keys, "returns": returns_held.tolist(), "risk_free": rf_series.tolist(), "benchmark": bench_series.tolist()},
         "checks.json": {"generated_at_utc": now, "all_passed": not failed, "checks": checks},
     }
@@ -278,7 +313,7 @@ def main() -> int:
     return 0
 
 
-def run_checks(orp, mvp, efficient, mu, cov, rf, references, brinson_orp, stress, upper, orp_stats) -> list[dict]:
+def run_checks(orp, mvp, efficient, mu, cov, rf, references, brinson_orp, stress, upper, orp_stats, clients, brinson_client) -> list[dict]:
     checks: list[dict] = []
 
     def check(name: str, passed: bool, detail: str) -> None:
@@ -317,6 +352,14 @@ def run_checks(orp, mvp, efficient, mu, cov, rf, references, brinson_orp, stress
         check(f"{label} performance ratios plausible", in_range and (perf["ann_return"] <= perf["ann_risk_free"] or perf["sharpe"] > 0),
               f"Sharpe={perf['sharpe']:.2f}, Sortino={perf['sortino']:.2f}, beta={perf['beta']:.2f}")
         check(f"{label} drawdown is negative", -1 < block["drawdown"]["max_drawdown"] < 0, f"MDD={block['drawdown']['max_drawdown']:.4f}")
+
+    client_sums = [float(c["weights"].sum() + c["cash"]) for c in clients.values()]
+    check("Client portfolios sum to one", max(abs(x - 1) for x in client_sums) < 1e-8, f"sums={[round(x, 8) for x in client_sums]}")
+    ordered = [references[f"A{a}"]["model_volatility"] for a in sorted(clients)]
+    check("Higher risk aversion never raises risk", all(b <= a + 1e-9 for a, b in zip(ordered, ordered[1:])), f"vols={[round(x, 4) for x in ordered]}")
+    check("Risk aversion changes the portfolio", ordered[0] - ordered[-1] > 0.02, f"highest vol {ordered[0]:.4f}, lowest vol {ordered[-1]:.4f}")
+    client_gap = brinson_client["allocation_total"] + brinson_client["selection_total"] - brinson_client["active_return"]
+    check("Client Brinson effects sum to active return", abs(client_gap) < 1e-8, f"residual={client_gap:.2e}")
 
     gap = brinson_orp["allocation_total"] + brinson_orp["selection_total"] - brinson_orp["active_return"]
     check("Brinson effects sum to active return", abs(gap) < 1e-8, f"residual={gap:.2e}")
