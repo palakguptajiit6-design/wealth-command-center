@@ -1,0 +1,43 @@
+name: Validate universe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - pipeline/validate_universe.py
+      - .github/workflows/validate-universe.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r pipeline/requirements.txt
+      - name: Run validation and keep the log
+        run: |
+          mkdir -p data/validation
+          set +e
+          python pipeline/validate_universe.py 2>&1 | tee data/validation/last_run.log
+          echo "exit_code=${PIPESTATUS[0]}" >> data/validation/last_run.log
+          exit 0
+      - name: Commit the report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/validation
+          git diff --cached --quiet && exit 0
+          git commit -m "data: universe validation report"
+          git pull --rebase origin main
+          git push origin HEAD:main
