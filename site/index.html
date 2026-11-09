@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wealth Command Center</title>
+<meta name="description" content="A private wealth and portfolio construction platform: client risk profiling, N-asset efficient frontier, VaR and CVaR stress testing, Brinson attribution, rebalancing and goals-based Monte Carlo." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%2305070b'/%3E%3Cpath d='M18 76 C30 42 52 30 84 24' stroke='%2300f0ff' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='52' cy='35' r='9' fill='%23ff2ec4'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="app-header">
+  <div class="brand">
+    <span class="dot" aria-hidden="true"></span>
+    <div>
+      <h1>Wealth Command Center</h1>
+      <div class="sub">Private Wealth &amp; Portfolio Construction</div>
+    </div>
+  </div>
+  <div class="market-clock">
+    <span class="live-badge" id="data-badge">LOADING</span>
+    <span id="clock">--:--:--</span>
+  </div>
+</header>
+
+<section class="kpi-strip" aria-label="Portfolio summary">
+  <div class="kpi-tile"><div class="kpi-label">Risk Aversion A</div><div class="kpi-value" id="kpi-a">—</div></div>
+  <div class="kpi-tile"><div class="kpi-label">In Risky Assets</div><div class="kpi-value" id="kpi-y">—</div></div>
+  <div class="kpi-tile"><div class="kpi-label">Expected Return</div><div class="kpi-value" id="kpi-return">—</div></div>
+  <div class="kpi-tile"><div class="kpi-label">Expected Volatility</div><div class="kpi-value" id="kpi-vol">—</div></div>
+  <div class="kpi-tile"><div class="kpi-label">95% 1-Day VaR (Hist.)</div><div class="kpi-value" id="kpi-var">—</div></div>
+  <div class="kpi-tile"><div class="kpi-label">Risk-Free Rate</div><div class="kpi-value" id="kpi-rf">—</div></div>
+</section>
+
+<nav class="tab-nav" role="tablist" aria-label="Platform modules" id="tab-nav"></nav>
+
+<main id="main-content">
+  <div id="panels"></div>
+  <p class="load-error" id="load-error" hidden>The market data could not be loaded. Please refresh the page.</p>
+</main>
+
+<footer class="footer-note">
+  <span>An independent project built on Investment Analysis &amp; Portfolio Management and Financial Risk Management coursework. For education only; not investment advice.</span>
+  <span id="footer-data"></span>
+</footer>
+
+<script src="vendor/chart-4.4.9.umd.js"></script>
+<script src="js/core.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
