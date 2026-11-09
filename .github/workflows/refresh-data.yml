@@ -1,0 +1,54 @@
+name: Refresh data
+
+# Weekly: this is a long-horizon strategic allocation tool, and weekly returns also
+# limit the distortion from NSE and US markets closing at different times.
+# 01:30 UTC Saturday is 07:00 IST, after the Friday US close.
+on:
+  schedule:
+    - cron: "30 1 * * 6"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - pipeline/build_data.py
+      - pipeline/analytics.py
+      - pipeline/config.py
+      - pipeline/fetch.py
+      - .github/workflows/refresh-data.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-commit
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r pipeline/requirements.txt
+      - name: Build data and keep the log
+        id: build
+        run: |
+          mkdir -p data/v1
+          set +e
+          python pipeline/build_data.py 2>&1 | grep -v -E "Pandas4Warning|FutureWarning" | tee data/v1/last_run.log
+          code=${PIPESTATUS[0]}
+          echo "exit_code=$code" >> data/v1/last_run.log
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/v1
+          git diff --cached --quiet && exit 0
+          git commit -m "data: refresh analytics (build exit ${{ steps.build.outputs.code }})"
+          git pull --rebase origin main
+          git push origin HEAD:main
