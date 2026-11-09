@@ -1,0 +1,106 @@
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   HDFCBANK.NS      1996-01-01 30.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   ICICIBANK.NS     2002-07-01 24.36y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   TCS.NS           2002-08-12 24.24y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   INFY.NS          1996-01-01 30.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   RELIANCE.NS      1996-01-01 30.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   NTPC.NS          2004-11-05 22.01y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   ITC.NS           1996-01-01 30.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   HINDUNILVR.NS    1996-01-01 30.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   MARUTI.NS        2003-07-09 23.34y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   LT.NS            2002-07-01 24.36y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   BHARTIARTL.NS    2002-07-01 24.36y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_equity   SUNPHARMA.NS     1996-01-01 30.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS gold           GOLDBEES.NS      2009-01-02 17.85y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+FAIL gold           SETFGOLD.NS      2026-07-17 0.3y ['only 0.30 years of history']
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: HDFCMFGETF.NS"}}}
+$HDFCMFGETF.NS: possibly delisted; no timezone found
+FAIL gold           HDFCMFGETF.NS    - -y ['no price history returned']
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS gold           GOLD1.NS         2008-04-17 18.56y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_debt     EBBETF0430.NS    2019-12-30 6.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_debt     GILT5YBEES.NS    2021-04-07 5.59y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+FAIL india_debt     SETF10GILT.NS    2026-07-17 0.3y ['only 0.30 years of history']
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS india_debt     LTGILTBEES.NS    2018-05-11 8.5y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+FAIL risk_free      LIQUIDBEES.NS    2009-01-02 17.85y ['50.3% of daily returns are exactly zero']
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS risk_free      0P00005UPP.BO    2018-01-01 8.85y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+FAIL risk_free      LIQUIDCASE.NS    2024-01-17 2.81y ['only 2.81 years of history']
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+FAIL risk_free      LIQUID1.NS       2026-01-01 0.85y ['only 0.85 years of history']
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS global_equity  URTH             2012-01-12 14.83y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS global_equity  VT               2008-06-26 18.37y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS global_equity  ACWI             2008-03-28 18.62y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS global_bonds   BNDX             2013-06-04 13.43y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS global_bonds   BND              2007-04-10 19.58y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS global_bonds   AGG              2003-09-29 23.11y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS fx             USDINR=X         2003-12-01 22.94y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS benchmark      NIFTYBEES.NS     2009-01-02 17.85y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS benchmark      ^NSEI            2007-09-17 19.15y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS stress_proxy   ^GSPC            1927-12-30 98.86y []
+/home/runner/work/wealth-command-center/wealth-command-center/pipeline/validate_universe.py:68: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+  window = close[close.index >= close.index[-1] - pd.Timedelta(days=int(MIN_YEARS * 365.25))]
+PASS stress_proxy   GC=F             2000-08-30 26.19y []
+exit_code=0
