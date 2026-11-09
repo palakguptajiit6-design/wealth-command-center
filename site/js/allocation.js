@@ -59,9 +59,10 @@
     const { universe, market } = WCC.data;
     root.querySelector("#alloc-universe").textContent = universe.instruments.length + " instruments, " + universe.window.sessions.toLocaleString("en-IN") +
       " sessions from " + fmt.date(universe.window.start) + ". Expected returns use Bayes-Stein shrinkage of " + fmt.pct(market.shrinkage_intensity, 0) + " toward the minimum-variance mean, because raw historical means are too noisy to optimise on.";
-    root.querySelector("#alloc-subs").innerHTML = "<thead><tr><th>Role</th><th>Requested</th><th>Used</th></tr></thead><tbody>" +
-      universe.substitutions.map((s) => `<tr title="${s.reason}"><td>${s.role}</td><td>${s.requested}</td><td>${s.replaced_by}</td></tr>`).join("") + "</tbody></table>" +
-      '<caption style="caption-side:bottom;text-align:left;font-size:11.5px;color:var(--text-muted);padding-top:8px;line-height:1.5">' + universe.substitutions.map((s) => s.requested + ": " + s.reason).join(" ") + "</caption>";
+    root.querySelector("#alloc-subs").innerHTML =
+      '<caption style="caption-side:bottom;text-align:left;font-size:11.5px;color:var(--text-muted);padding-top:8px;line-height:1.5">' + universe.substitutions.map((s) => s.requested + ": " + s.reason).join(" ") + "</caption>" +
+      "<thead><tr><th>Role</th><th>Requested</th><th>Used</th></tr></thead><tbody>" +
+      universe.substitutions.map((s) => `<tr><td>${s.role}</td><td>${s.requested}</td><td>${s.replaced_by}</td></tr>`).join("") + "</tbody>";
   }
 
   function frontierDatasets(client) {
