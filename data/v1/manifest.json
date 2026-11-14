@@ -1,7 +1,7 @@
 {
   "schema_version": "v1",
-  "generated_at_utc": "2026-11-09T16:50:33Z",
-  "data_through": "2026-11-09",
+  "generated_at_utc": "2026-11-14T02:17:28Z",
+  "data_through": "2026-11-12",
   "yfinance_version": "1.8.0",
   "files": [
     "checks.json",
