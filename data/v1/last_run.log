@@ -19,56 +19,56 @@ Downloading market data
   NIFTY        NIFTYBEES.NS     from 2009-01-02
   ACWI         ACWI             from 2008-03-28
   AGG          AGG              from 2003-09-29
-Common window 2019-12-30 to 2026-11-19, 1706 sessions
+Common window 2019-12-30 to 2026-11-26, 1710 sessions
 /home/runner/work/wealth-command-center/wealth-command-center/pipeline/build_data.py:168: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
   rf_recent = panel["RF"].loc[panel.index[-1] - pd.Timedelta(days=cfg.ANNUAL_RF_LOOKBACK_DAYS):]
 PASS  ORP weights sum to one: sum=1.0000000000
 PASS  MVP weights sum to one: sum=1.0000000000
 PASS  Frontier weights sum to one: worst error=2.22e-16
-PASS  Weights respect long-only bounds and caps: min=0.00e+00, largest cap excess=2.14e-15
-PASS  Frontier is upward sloping and concave: min second difference of volatility=1.84e-05
-PASS  MVP is the lowest-risk frontier point: MVP vol=0.0384
-PASS  Tangency Sharpe beats every frontier point: ORP=0.7567, best point=0.7565
+PASS  Weights respect long-only bounds and caps: min=0.00e+00, largest cap excess=2.50e-16
+PASS  Frontier is upward sloping and concave: min second difference of volatility=1.97e-05
+PASS  MVP is the lowest-risk frontier point: MVP vol=0.0383
+PASS  Tangency Sharpe beats every frontier point: ORP=0.7018, best point=0.7014
 PASS  Risk-free rate is plausible: rf=0.0644
-PASS  ORP earns a premium over risk-free: E=0.1207
+PASS  ORP earns a premium over risk-free: E=0.1170
 PASS  Covariance matrix is positive definite: smallest eigenvalue=1.01e-03
-PASS  orp 95% VaR sign, order and size: VaR/daily vol=1.31, CVaR=0.0113
-PASS  orp 99% VaR sign, order and size: VaR/daily vol=2.44, CVaR=0.0213
-PASS  orp performance ratios plausible: Sharpe=1.30, Sortino=1.86, beta=0.32
-PASS  orp drawdown is negative: MDD=-0.1349
-PASS  mvp 95% VaR sign, order and size: VaR/daily vol=1.31, CVaR=0.0058
-PASS  mvp 99% VaR sign, order and size: VaR/daily vol=2.46, CVaR=0.0108
+PASS  orp 95% VaR sign, order and size: VaR/daily vol=1.33, CVaR=0.0114
+PASS  orp 99% VaR sign, order and size: VaR/daily vol=2.52, CVaR=0.0214
+PASS  orp performance ratios plausible: Sharpe=1.26, Sortino=1.80, beta=0.33
+PASS  orp drawdown is negative: MDD=-0.1384
+PASS  mvp 95% VaR sign, order and size: VaR/daily vol=1.32, CVaR=0.0058
+PASS  mvp 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0108
 PASS  mvp performance ratios plausible: Sharpe=0.58, Sortino=0.81, beta=0.11
-PASS  mvp drawdown is negative: MDD=-0.0638
-PASS  A2 95% VaR sign, order and size: VaR/daily vol=1.26, CVaR=0.0182
-PASS  A2 99% VaR sign, order and size: VaR/daily vol=2.64, CVaR=0.0355
-PASS  A2 performance ratios plausible: Sharpe=1.20, Sortino=1.66, beta=0.60
-PASS  A2 drawdown is negative: MDD=-0.2623
-PASS  A4 95% VaR sign, order and size: VaR/daily vol=1.27, CVaR=0.0176
-PASS  A4 99% VaR sign, order and size: VaR/daily vol=2.61, CVaR=0.0342
-PASS  A4 performance ratios plausible: Sharpe=1.21, Sortino=1.68, beta=0.58
-PASS  A4 drawdown is negative: MDD=-0.2508
-PASS  A6 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0141
-PASS  A6 99% VaR sign, order and size: VaR/daily vol=2.47, CVaR=0.0270
-PASS  A6 performance ratios plausible: Sharpe=1.28, Sortino=1.80, beta=0.43
-PASS  A6 drawdown is negative: MDD=-0.1853
-PASS  A8 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0124
-PASS  A8 99% VaR sign, order and size: VaR/daily vol=2.50, CVaR=0.0236
-PASS  A8 performance ratios plausible: Sharpe=1.30, Sortino=1.84, beta=0.37
-PASS  A8 drawdown is negative: MDD=-0.1557
-PASS  A14 95% VaR sign, order and size: VaR/daily vol=1.29, CVaR=0.0082
-PASS  A14 99% VaR sign, order and size: VaR/daily vol=2.43, CVaR=0.0154
-PASS  A14 performance ratios plausible: Sharpe=1.30, Sortino=1.86, beta=0.23
-PASS  A14 drawdown is negative: MDD=-0.0990
+PASS  mvp drawdown is negative: MDD=-0.0640
+PASS  A2 95% VaR sign, order and size: VaR/daily vol=1.26, CVaR=0.0183
+PASS  A2 99% VaR sign, order and size: VaR/daily vol=2.68, CVaR=0.0356
+PASS  A2 performance ratios plausible: Sharpe=1.16, Sortino=1.62, beta=0.62
+PASS  A2 drawdown is negative: MDD=-0.2646
+PASS  A4 95% VaR sign, order and size: VaR/daily vol=1.27, CVaR=0.0171
+PASS  A4 99% VaR sign, order and size: VaR/daily vol=2.56, CVaR=0.0331
+PASS  A4 performance ratios plausible: Sharpe=1.18, Sortino=1.64, beta=0.57
+PASS  A4 drawdown is negative: MDD=-0.2418
+PASS  A6 95% VaR sign, order and size: VaR/daily vol=1.32, CVaR=0.0139
+PASS  A6 99% VaR sign, order and size: VaR/daily vol=2.53, CVaR=0.0266
+PASS  A6 performance ratios plausible: Sharpe=1.24, Sortino=1.74, beta=0.44
+PASS  A6 drawdown is negative: MDD=-0.1836
+PASS  A8 95% VaR sign, order and size: VaR/daily vol=1.36, CVaR=0.0120
+PASS  A8 99% VaR sign, order and size: VaR/daily vol=2.52, CVaR=0.0228
+PASS  A8 performance ratios plausible: Sharpe=1.26, Sortino=1.78, beta=0.35
+PASS  A8 drawdown is negative: MDD=-0.1491
+PASS  A14 95% VaR sign, order and size: VaR/daily vol=1.30, CVaR=0.0075
+PASS  A14 99% VaR sign, order and size: VaR/daily vol=2.49, CVaR=0.0143
+PASS  A14 performance ratios plausible: Sharpe=1.26, Sortino=1.80, beta=0.22
+PASS  A14 drawdown is negative: MDD=-0.0937
 PASS  benchmark 95% VaR sign, order and size: VaR/daily vol=1.43, CVaR=0.0240
-PASS  benchmark 99% VaR sign, order and size: VaR/daily vol=2.89, CVaR=0.0424
-PASS  benchmark performance ratios plausible: Sharpe=0.48, Sortino=0.65, beta=1.00
+PASS  benchmark 99% VaR sign, order and size: VaR/daily vol=2.88, CVaR=0.0424
+PASS  benchmark performance ratios plausible: Sharpe=0.49, Sortino=0.67, beta=1.00
 PASS  benchmark drawdown is negative: MDD=-0.3634
 PASS  Client portfolios sum to one: sums=[1.0, 1.0, 1.0, 1.0, 1.0]
-PASS  Higher risk aversion never raises risk: vols=[0.1271, 0.1218, 0.095, 0.0826, 0.0541]
-PASS  Risk aversion changes the portfolio: highest vol 0.1271, lowest vol 0.0541
-PASS  Client Brinson effects sum to active return: residual=-1.33e-15
-PASS  Brinson effects sum to active return: residual=-2.78e-15
+PASS  Higher risk aversion never raises risk: vols=[0.1273, 0.1169, 0.0936, 0.0796, 0.0501]
+PASS  Risk aversion changes the portfolio: highest vol 0.1273, lowest vol 0.0501
+PASS  Client Brinson effects sum to active return: residual=2.22e-16
+PASS  Brinson effects sum to active return: residual=4.66e-15
 PASS  2008 Global Financial Crisis is a real drawdown: Nifty -59.9% from 2008-01-08 to 2008-10-27
 PASS  2020 COVID Crash is a real drawdown: Nifty -38.4% from 2020-01-14 to 2020-03-23
 Wrote 8 files to /home/runner/work/wealth-command-center/wealth-command-center/data/v1
